@@ -49,7 +49,6 @@
         }
 
         .leaf { position: absolute; cursor: default; user-select: none; transform: translate(-50%, -50%); }
-        
         .special-leaf { font-size: 42px; filter: drop-shadow(0 0 15px gold); animation: glow 2s infinite; z-index: 500; cursor: pointer; }
         .main-envelope-trigger { font-size: 90px; z-index: 600; animation: glow 2s infinite; cursor: pointer; }
 
@@ -73,33 +72,28 @@
         .envelope-wrapper .flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 110px solid var(--env-light); border-left: 150px solid transparent; border-right: 150px solid transparent; transform-origin: top; transition: 0.6s; z-index: 10; }
         .envelope-wrapper .pocket { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 150px solid var(--env-color); border-right: 150px solid var(--env-color); border-bottom: 100px solid #b71c1c; border-top: 100px solid transparent; z-index: 8; }
         
+        /* CARTA ESTILO PAPEL */
         .letter-card { 
             position: absolute; bottom: 5px; left: 10px; width: 280px; height: 180px; 
-            background: #fffdf0; padding: 25px; box-sizing: border-box; z-index: 5; 
+            background: #fffdf0; padding: 20px; box-sizing: border-box; z-index: 5; 
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            border-radius: 8px; text-align: center;
+            border-radius: 8px; text-align: center; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: center;
         }
 
         .envelope-wrapper.open .flap { transform: rotateX(180deg); z-index: 1; }
         .envelope-wrapper.open .letter-card { 
-            transform: translateY(-50%) scale(1.15); 
+            transform: translateY(-50%) scale(1.1); 
             position: fixed; top: 50%; left: 50%; margin-left: -140px; 
-            height: auto; min-height: 400px; z-index: 6000; 
-            display: flex; flex-direction: column; justify-content: center;
+            height: auto; min-height: 420px; z-index: 6000; 
         }
 
         /* LLUVIA DE CORAZONES */
         .falling-heart { 
-            position: fixed; 
-            top: -10%; 
-            font-size: 24px; 
-            z-index: 9999; 
-            pointer-events: none;
-            animation: fall linear forwards; 
+            position: fixed; top: -10%; font-size: 24px; z-index: 9999; 
+            pointer-events: none; animation: fall linear forwards; 
         }
-        @keyframes fall { 
-            to { transform: translateY(110vh) rotate(360deg); } 
-        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
         @keyframes pulse { 0%, 100% { transform: rotate(-45deg) scale(1); } 50% { transform: rotate(-45deg) scale(1.1); } }
         @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 10px gold); } 50% { filter: drop-shadow(0 0 25px gold); } }
@@ -113,11 +107,9 @@
 
     <div id="main">
         <div class="heart-shape-container" id="heart-shape"></div>
-        
         <div class="content-box">
             <h1 id="title">Nuestra Historia</h1>
             <div class="timer" id="clock">0d 0h 0m 0s</div>
-            
             <div id="game-area">
                 <div id="before-chi">
                     <p style="font-weight: bold; color: #555; margin: 10px 0;">¿Siempre me dirás GO?</p>
@@ -136,11 +128,12 @@
             <div class="flap"></div>
             <div class="pocket"></div>
             <div class="letter-card" id="letter" onclick="event.stopPropagation()">
-                <div style="font-family:'Dancing Script'; font-size:1.4rem; color:#333; line-height: 1.5;">
-                    <p style="margin-top:0;"><b>FELIZ SAN VALENTIN MI NIÑA HERMOSA</b></p>
-                    <p>Aun que no podamos estar juntos hoy, quiero que sepas que siempre estas en mi corazón y mente.</p>
-                    <p>Nuestro primer San Valentin... ¿Te acuerdas como pasó todo? jaja ¿GO?</p>
-                    <button style="background:var(--heart-red); color:white; border:none; padding:12px 25px; border-radius:25px; cursor:pointer; font-weight:bold; margin-top:20px; font-family:'Montserrat';" onclick="showFinalPhoto()">VER FOTO ❤️</button>
+                <div style="font-family:'Dancing Script'; font-size:1.4rem; color:#333; line-height: 1.4;">
+                    <p style="margin-top:0; color:var(--heart-red);"><b>FELIZ SAN VALENTÍN MI NIÑA HERMOSA</b></p>
+                    <p>Aun que no podamos estar juntos hoy, quiero que sepas que siempre estás en mi corazón y mente.</p>
+                    <p>Nuestro primer San Valentín... ¿Te acuerdas como pasó todo? jaja</p>
+                    <p style="font-size: 1.8rem; margin: 10px 0;"><b>¿GO?</b></p>
+                    <button style="background:var(--heart-red); color:white; border:none; padding:12px 25px; border-radius:25px; cursor:pointer; font-weight:bold; margin-top:15px; font-family:'Montserrat';" onclick="showFinalPhoto()">VER FOTO ❤️</button>
                 </div>
             </div>
         </div>
@@ -153,14 +146,14 @@
     <div id="modal-img" class="modal" onclick="this.style.display='none'">
         <div style="text-align:center;">
             <img id="mImg" src="" style="max-width:85%; border:5px solid white; border-radius:15px;">
-            <p id="mTxt" style="color:white; font-family:'Dancing Script'; font-size:2rem; margin-top:15px;"></p>
+            <p id="mTxt" style="color:white; font-family:'Dancing Script'; font-size:2rem; margin-top:15px; padding: 0 20px;"></p>
         </div>
     </div>
 
 <script>
     const fotos = [
         { url: 'https://cdn.discordapp.com/attachments/1340394471136956486/1472285308195307731/TU_FOTO_1.jpg?ex=6992040b&is=6990b28b&hm=85de94fd6547ca05c5784301692a10d853da2a37dde8b951e4b425a376a3a782&', msg: 'Tú y yo' },
-        { url: 'https://media.discordapp.net/attachments/1340394471136956486/1472285305787781312/WhatsApp_Image_2026-02-14_at_1.06.29_AM_1.jpeg?ex=6992040a&is=6990b28a&hm=7254de095cf8caecb23dd467e79a0820c97284be60b9da1d206878737aeb0b35&', msg: 'Tu sonrisa' },
+        { url: 'https://media.discordapp.net/attachments/1340394471136956486/1472285305787781312/WhatsApp_Image_2026-02-14_at_1.06.29_AM_1.jpeg?ex=6992040a&is=6990b28a&hm=7254de095cf8caecb23dd467e79a0820c97284be60b9da1d206878737aeb0b35&', msg: 'Gracias por todos los momentos bonitos' },
         { url: 'https://cdn.discordapp.com/attachments/1340394471136956486/1472285307809566832/WhatsApp_Image_2026-02-14_at_1.06.28_AM.jpeg?ex=6992040b&is=6990b28b&hm=0a0c9e7405c47633cba636a5526966ad2eb3ec08f988dd7caf8ddb2cb452c91b&', msg: 'Te amo' }
     ];
 
@@ -173,9 +166,7 @@
 
     function renderSolidHeart() {
         const container = document.getElementById('heart-shape');
-        const centerX = 190;
-        const centerY = 180;
-        const scale = 13.5;
+        const centerX = 190; const centerY = 180; const scale = 13.5;
 
         for (let i = 0; i < 600; i++) {
             let x = (Math.random() - 0.5) * 35;
@@ -232,7 +223,7 @@
         const envWrapper = document.getElementById('envelope');
         if(!envWrapper.classList.contains('open')) {
             envWrapper.classList.add('open'); 
-            heartRain(45); // Lluvia al abrir
+            heartRain(50);
         }
     }
 
@@ -243,15 +234,14 @@
         const btn = document.getElementById('btn-no');
         const x = Math.random() * (window.innerWidth - 120);
         const y = Math.random() * (window.innerHeight - 60);
-        btn.style.position = 'fixed';
-        btn.style.left = x + 'px'; btn.style.top = y + 'px';
+        btn.style.position = 'fixed'; btn.style.left = x + 'px'; btn.style.top = y + 'px';
         btn.style.zIndex = "2000";
     }
 
     function celebrate() {
         document.getElementById('before-chi').style.display = 'none';
         document.getElementById('final-msg').style.display = 'block';
-        heartRain(100); // Lluvia masiva al presionar CHI
+        heartRain(100);
     }
 
     function updateTime() {
